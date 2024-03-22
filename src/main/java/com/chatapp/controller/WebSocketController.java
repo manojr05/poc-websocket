@@ -12,16 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequiredArgsConstructor
 public class WebSocketController {
 
-    private final SimpMessagingTemplate simpMessagingTemplate;
+
 
     @MessageMapping("/message")
     @SendTo("/topic/return-to")
     public Message sendMessage(@RequestBody Message message){
         return message;
-    }
-
-    public void sendMessageToSubscribers(Message message) {
-        simpMessagingTemplate.convertAndSend("/topic/return-to", message);
     }
 
 }
